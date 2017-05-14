@@ -489,9 +489,22 @@ def handleEvent(evt) {
         data += ",unit=${unit} value=${value}"
     }
     
-    // Post data to InfluxDB:
-    postToInfluxDB(data)
-
+    if (measurement == "temperature")
+    {
+       //int convertedNumber = Integer.parseInt(value)
+       double convertedNumber = Double.parseDouble(value)
+       
+       if (convertedNumber <= 110.0)
+       {
+          // Post data to InfluxDB:
+          postToInfluxDB(data)
+       }
+    }
+    else
+    {
+       // Post data to InfluxDB:
+       postToInfluxDB(data)
+    }
 }
 
 
